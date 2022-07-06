@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-using WSGestionStockk;
+using WSGestionStock;
 
 namespace ClientGestionStock
 {
@@ -76,6 +76,7 @@ namespace ClientGestionStock
                 ArticleResult.Add(category);
             }
 
+            datagridArticle.Columns.Single(c => c.Header.ToString() == "Supprimer").DisplayIndex = datagridArticle.Columns.Count - 1;
             ShowArticles();
         }
 
