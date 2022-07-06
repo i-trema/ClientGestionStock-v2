@@ -82,14 +82,14 @@ namespace ClientGestionStock
         private void Valider_AjoutArticle(object sender, RoutedEventArgs e)
         {
             var categorie = wsCategorieClient.RechercherCategoriesByMotCle(SelectedCategorie)[0];
-            wsArticleClient.AjoutArticle(new Article()
+            int a = wsArticleClient.AjoutArticle(new Article()
             {
                 Categorie = categorie,
                 Designation = DesignationTB,
                 Prix = double.Parse(PrixTB),
                 QteMini = int.Parse(QuantiteMiniTB)
             });
-
+            if (a > 0) MessageBox.Show("L'article a bien été ajouté");
             this.Close();
         }
 

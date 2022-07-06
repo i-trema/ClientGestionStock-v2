@@ -98,6 +98,7 @@ namespace ClientGestionStock
 
             addArticle.Owner = this;
             addArticle.ShowDialog();
+            
             ListAllArticles(sender,e);
         }
 
