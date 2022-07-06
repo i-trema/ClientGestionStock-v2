@@ -1,19 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WSGestionStock;
 
 namespace ClientGestionStock
@@ -29,7 +18,6 @@ namespace ClientGestionStock
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         
         private double? prix = 1.0;
         public string PrixTB
@@ -42,7 +30,7 @@ namespace ClientGestionStock
             }
         }
 
-        private string designation;
+        private string designation = "";
         public string DesignationTB
         {
             get { return this.designation; }
@@ -56,21 +44,17 @@ namespace ClientGestionStock
         private int? quantiteMini = 1;
         public string QuantiteMiniTB
         {
-            get { return this.prix.ToString(); }
+            get { return this.quantiteMini.ToString(); }
             set
             {
-                this.prix = int.Parse(value);
+                this.quantiteMini = int.Parse(value);
                 NotifyPropertyChanged();
             }
         }
 
-
-
-
-
         public ObservableCollection<string> ListeCategories { get; set; } = new ObservableCollection<string>();
 
-        private string selectedCategorie;
+        private string selectedCategorie = "";
         public string SelectedCategorie
         {
             get { return this.selectedCategorie; }
@@ -81,11 +65,13 @@ namespace ClientGestionStock
             }
         }
 
+        private GestionStockClient wsArticleClient = new GestionStockClient();
+        private GestionCategorieClient wsCategorieClient = new GestionCategorieClient();
+
         public AddArticle()
         {
             InitializeComponent();
             DataContext = this;
-            GestionCategorieClient wsCategorieClient = new GestionCategorieClient();
             var categories = wsCategorieClient.GetCategories();
             foreach (var cat in categories)
             {
@@ -95,9 +81,6 @@ namespace ClientGestionStock
 
         private void Valider_AjoutArticle(object sender, RoutedEventArgs e)
         {
-            GestionStockClient wsArticleClient = new GestionStockClient();
-            GestionCategorieClient wsCategorieClient = new GestionCategorieClient();
-
             var categorie = wsCategorieClient.RechercherCategoriesByMotCle(SelectedCategorie)[0];
             wsArticleClient.AjoutArticle(new Article()
             {
@@ -108,13 +91,6 @@ namespace ClientGestionStock
             });
 
             this.Close();
-
-            
-            //AddArticle addArticle = new AddArticle();
-            //addArticle.Owner = this;
-            //addArticle.ShowDialog();
-
-
         }
 
         private void AnnulerAjouArticle(object sender, RoutedEventArgs e)

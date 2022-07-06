@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClientGestionStock"
         xmlns:c="clr-namespace:ClientGestionStock.Converter"
         mc:Ignorable="d"
-        Title="Gestion Stock" Height="600" Width="800">
+        Title="Gestion Stock" Height="600" Width="1000">
 
     <Window.Resources>
         <c:BoolToVisibilityConverter x:Key="BoolToVis"/>
@@ -74,10 +74,6 @@
             Grid.Column="0" Grid.Row="2" 
             Click="AjouterArticle"/>
 
-        
-
-
-
         <Button 
             Content="Vider la liste" 
             Style="{StaticResource BasicButton}" 
@@ -90,12 +86,6 @@
             Visibility="{Binding Path=ArticleVisibility, Converter={StaticResource BoolToVis}}" 
             Grid.RowSpan="9" Grid.Column="1">
 
-            
-            <!--Content="Supprimer" 
-            Style="{StaticResource BasicButton}" 
-            Grid.Column="0" 
-            Click="SupprimerArticle"/>-->
-            
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
@@ -103,7 +93,6 @@
             </DataGrid.RowStyle>
 
             <DataGrid.Columns>
-                
                 <DataGridTemplateColumn Header="Supprimer" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
@@ -112,9 +101,6 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-        
-
-            
         </DataGrid>
 
         <DataGrid 
@@ -122,15 +108,5 @@
             Visibility="{Binding Path=CategorieVisibility, Converter={StaticResource BoolToVis}}" 
             Grid.RowSpan="9" Grid.Column="1" SelectionChanged="DataGrid_SelectionChanged">
         </DataGrid>
-
-        <!--<Button 
-            Content="Supprimer" 
-            Style="{StaticResource BasicButton}" 
-            Grid.Column="1" Grid.Row="10" 
-            Click="SupprimerBtn"/>-->
-
-
-
-
     </Grid>
 </Window>
