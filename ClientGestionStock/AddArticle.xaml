@@ -1,0 +1,56 @@
+﻿<Window x:Class="ClientGestionStock.AddArticle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientGestionStock"
+        mc:Ignorable="d"
+        Title="AddArticle" Height="500" Width="400">
+
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ChoixCategorie" TargetType="ComboBox">
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="Margin" Value="20"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Categorie :" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="0"/>
+        <ComboBox
+            Style="{StaticResource ChoixCategorie}"
+            ItemsSource="{Binding ListeCategories, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedCategorie}"
+            IsSynchronizedWithCurrentItem="True">
+        </ComboBox>
+
+        <Label Content="Designation :" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="1" />
+        <TextBox Text="{Binding DesignationTB}" Grid.Column="1" Grid.Row="1" Margin="20"/>
+
+        <Label Content="Prix :" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="2"/>
+        <TextBox Text="{Binding PrixTB}"  Grid.Column="1" Grid.Row="2" Margin="20"/>
+
+        <Label Content="Quantite min :" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="3"/>
+        <TextBox Text="{Binding QuantiteMiniTB}" Grid.Column="1" Grid.Row="3" Margin="20"/>
+
+        <Button Grid.Column="1" Grid.Row="4" Content="Valider" Click="Valider_AjoutArticle"/>
+        <Button Grid.Column="0" Grid.Row="4" Content="Annuler" Click="AnnulerAjouArticle"/>
+
+    </Grid>
+</Window>
